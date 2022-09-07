@@ -1,14 +1,18 @@
 #pragma once
 
-#include "src/Topo.h"
+#include "Src/Topo.h"
 
 class Planet
 {
 private:
-	Circle cir;
+	Circle cir{};
 	float grav;
+	Color color{};
 
 public:
 	Planet();
 	~Planet();
+
+	void update();
+	void draw();
 };
