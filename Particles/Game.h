@@ -1,4 +1,7 @@
 #pragma once
+#include "Src/Topo.h"
+#include "Planet.h"
+
 class Game
 {
 private:
