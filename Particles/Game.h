@@ -17,6 +17,7 @@ private:
 	static const int partCount = 1000;
 
 	Particle part[partCount];
+	Planet* planet;
 
 public:
 	Game();

@@ -2,7 +2,7 @@
 
 void Game::update()
 {
-
+	planet->update();
 
 }
 
@@ -15,6 +15,8 @@ void Game::draw()
 	{
 		DrawPixelV(part[i].pos, WHITE);
 	}
+
+	planet->draw();
 
 	EndDrawing();
 }
@@ -31,6 +33,8 @@ void Game::play()
 
 Game::Game()
 {
+	planet = new Planet();
+
 	for (int i = 0; i < partCount; i++)
 	{
 
