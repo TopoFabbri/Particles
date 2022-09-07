@@ -8,16 +8,25 @@ void Game::update()
 
 void Game::draw()
 {
+	BeginDrawing();
+	ClearBackground(BLACK);
+
 	for (int i = 0; i < partCount; i++)
 	{
 		DrawPixelV(part[i].pos, WHITE);
 	}
+
+	EndDrawing();
 }
 
 void Game::play()
 {
+	//Update
+	update();
 
 
+	//Draw
+	draw();
 }
 
 Game::Game()
@@ -30,6 +39,7 @@ Game::Game()
 	}
 
 }
+
 Game::~Game()
 {
 
@@ -41,12 +51,7 @@ void Game::loop()
 {
 	while (!WindowShouldClose())
 	{
-		//Update
-		update();
-
-
-		//Draw
-		draw();
+		play();
 	}
 
 }

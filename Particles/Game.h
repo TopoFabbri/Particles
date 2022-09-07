@@ -14,7 +14,7 @@ class Game
 {
 private:
 
-	static const int partCount = 10000;
+	static const int partCount = 1000;
 
 	Particle part[partCount];
 

@@ -15,12 +15,16 @@ void main()
 
 void runProgram()
 {
-    Game* game = new Game();
     defaults();
-    game->play();
+
+    Game* game = new Game();
+    game->loop();
+    delete game;
 }
 
 void defaults()
 {
     srand(time(nullptr));
+    SetTargetFPS(60);
+    InitWindow(1920, 1080, "Particles - FewZ");
 }
