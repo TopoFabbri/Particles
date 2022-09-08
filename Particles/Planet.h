@@ -5,11 +5,12 @@
 class Planet
 {
 private:
-	Circle cir{};
-	float grav;
-	Color color{};
+	Circle cir;
+	Color color;
 
 public:
+	float grav;
+
 	Planet();
 	~Planet();
 

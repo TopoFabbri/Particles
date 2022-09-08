@@ -1,9 +1,45 @@
 #include "Game.h"
 
+Game::Game()
+{
+	planet = new Planet();
+
+	for (int i = 0; i < partCount; i++)
+	{
+		part[i] = new Particle();
+	}
+}
+
+Game::~Game()
+{
+}
+
+void Game::play()
+{
+	//Update
+	update();
+
+	//Draw
+	draw();
+}
+
 void Game::update()
 {
-	planet->update();
+	planet->grav += (GetMouseWheelMove() * 1000);
+	if (IsMouseButtonPressed(MOUSE_BUTTON_MIDDLE))
+		planet->grav = 0;
 
+	planet->update();
+	for (int i = 0; i < partCount; i++)
+	{
+		updateParticleVel(i);
+		part[i]->move();
+
+		if (IsMouseButtonDown(MOUSE_BUTTON_RIGHT))
+			part[i]->moveLeft();
+		if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
+			part[i]->moveRight();
+	}
 }
 
 void Game::draw()
@@ -13,42 +49,22 @@ void Game::draw()
 
 	for (int i = 0; i < partCount; i++)
 	{
-		DrawPixelV(part[i].pos, WHITE);
+		part[i]->draw();
 	}
 
-	planet->draw();
+	//planet->draw();
 
 	EndDrawing();
 }
 
-void Game::play()
+void Game::updateParticleVel(int i)
 {
-	//Update
-	update();
-
-
-	//Draw
-	draw();
-}
-
-Game::Game()
-{
-	planet = new Planet();
-
-	for (int i = 0; i < partCount; i++)
-	{
-
-		part[i] = setParticle();
-
-	}
-
-}
-
-Game::~Game()
-{
-
-
-
+	Vector2 dis = part[i]->getDistance(GetMousePosition());
+	Vector2 newVel{};
+	newVel.x = dis.x / getLength({ part[i]->getPos(), GetMousePosition() });
+	newVel.y = dis.y / getLength({ part[i]->getPos(), GetMousePosition() });
+	part[i]->setVelocity(newVel);
+	part[i]->setSpeed(planet->grav/getLength({ part[i]->getPos(), GetMousePosition() }));
 }
 
 void Game::loop()
@@ -57,21 +73,4 @@ void Game::loop()
 	{
 		play();
 	}
-
-}
-
-Particle setParticle()
-{
-	Particle particle;
-
-	particle.pos.x = rand() % GetScreenWidth();
-	particle.pos.y = rand() % GetScreenHeight();
-
-	particle.velocity.x = 0.0f;
-	particle.velocity.y = 0.0f;
-
-	particle.weight = 1.0f;
-
-	return particle;
-
 }

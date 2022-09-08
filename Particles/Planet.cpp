@@ -3,7 +3,7 @@
 Planet::Planet()
 {
 	cir = {{0, 0}, 10 };
-	grav = 1;
+	grav = 1000;
 	color = RED;
 }
 
