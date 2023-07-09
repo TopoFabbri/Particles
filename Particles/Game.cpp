@@ -55,6 +55,8 @@ void Game::draw()
 	//planet->draw();
 
 	EndDrawing();
+
+	TakeScreenshot("Space.png");
 }
 
 void Game::updateParticleVel(int i)

@@ -7,7 +7,7 @@ class Game
 {
 private:
 
-	static const int partCount = 5000;
+	static const int partCount = 3000;
 
 	Particle* part[partCount];
 	Planet* planet;
